@@ -1,12 +1,12 @@
 import express from 'express';
+import routes from './routes.ts';
+
 import './database/connection';
 
 const app = express();
-app.use(express.json());
 
-app.post('/orphanages', (req, res) => {
-  console.log(req.body);
-  return res.send('TODO:');
-});
+app.use(express.json());
+app.use(routes);
+
 
 app.listen(3333);
