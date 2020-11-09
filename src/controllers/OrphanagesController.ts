@@ -45,9 +45,15 @@ export default {
       }))
     });
 
-    await schema.validate({ ...orphanageInfo, images }, { abortEarly: false })
+    const data = {
+      images,
+      ...orphanageInfo,
+      open_on_weekends: orphanageInfo.open_on_weekends === 'true' ? true : false,
+    }
 
-    const orphanage = orphanagesRepository.create({ ...orphanageInfo, images });
+    await schema.validate(data, { abortEarly: false })
+
+    const orphanage = orphanagesRepository.create(data);
 
     await orphanagesRepository.save(orphanage);
 
